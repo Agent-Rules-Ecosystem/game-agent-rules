@@ -7,10 +7,15 @@ overview/
 ├── context/
 ├── history/
 ├── workflows/
+├── work/
+│   ├── tasks.md
+│   ├── pendientes.md
+│   └── deuda_tecnica.md
 ├── architecture.md
 ├── learning.md
 ├── session.md
 ├── work.md
+├── work_review.md
 └── trackers/
     ├── architecture.md
     ├── progress.md

@@ -1,17 +1,18 @@
 # Tracker: arquitectura y rutas
 
-## Mapa de módulos
+## Mapa de navegación
 
 ```mermaid
-graph TD
+graph LR
     classDef done fill:#2e7d32,stroke:#fff,color:#fff;
     classDef active fill:#1565c0,stroke:#fff,color:#fff;
-    classDef pending fill:#c62828,stroke:#fff,color:#fff;
-
-    root[lib/]:::done --> f1[feature/]:::pending
+    
+    auth[Auth]:::done --> dashboard[Dashboard]:::active
+    dashboard --> profile[Perfil]:::active
+    dashboard --> settings[Ajustes]:::active
 ```
 
-`done`: auditado. `active`: en trabajo actual. `pending`: pendiente de revisar.
+`done` = auditado · `active` = en trabajo actual · `pending` = pendiente (fill `#c62828`).
 
 ---
 
@@ -35,14 +36,6 @@ Estados: `activo`, `refactor pendiente`, `deprecado`, `bloqueado`.
 
 ---
 
-## Deuda técnica
-
-| ID | Descripción | Prioridad | Vinculado a work.md |
-|---|---|---|---|
-| d1 | | alta / media / baja | |
-
----
-
 ## Decisiones de arquitectura (ADR mínimo)
 
 <!-- Registrar decisiones significativas para que Agentes entrantes entiendan el "por qué" sin reabrir discusiones resueltas. -->
@@ -53,3 +46,7 @@ Estados: `activo`, `refactor pendiente`, `deprecado`, `bloqueado`.
 - **Decisión tomada:** …
 - **Consecuencias / trade-offs:** …
 - **Agente que decidió:** [firma — ver `core/communication.md §3`]
+
+---
+
+> **Deuda técnica** → `overview/work/deuda_tecnica.md` (backlog canónico único; no registrar aquí).

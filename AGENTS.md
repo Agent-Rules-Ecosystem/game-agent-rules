@@ -22,7 +22,11 @@ Antes de responder o editar, leer y cumplir:
 - Primer mensaje de conversación cuando el proyecto tiene `.agents/` pero no `overview/`.
 - Cualquier mensaje que comience con `$` → reconocer como $-comando según `core/commands.md` y ejecutar el protocolo correspondiente.
 
+<<<<<<< HEAD
 Para cualquier tarea que inspeccione o cambie código GDScript (`.gd`, `.tscn`), escenas o documentos de historia/lore, cargar previamente `overview/session.md`, `overview/work.md` y `overview/trackers/progress.md`. Actualizar `overview/work.md` y `overview/session.md` INMEDIATAMENTE antes de ejecutar (Registro preventivo previo a ejecución); en reporte de bug incluir hipótesis breve (5-7 palabras). Si falta `overview/` o uno de esos archivos, crearlo desde `.agents/templates/`. Si falta `overview/architecture.md` o los documentos de lore en `docs/lore/`, crearlos desde sus plantillas correspondientes.
+=======
+Para cualquier tarea que inspeccione o cambie código del proyecto, antes de analizar o responder cargar `overview/session.md`, `overview/work.md`, `overview/work/tasks.md`, `overview/work/deuda_tecnica.md`, `overview/work/pendientes.md` y `overview/trackers/progress.md`. Actualizar `overview/work.md`, `overview/work/tasks.md` y `overview/session.md` INMEDIATAMENTE antes de ejecutar (Registro preventivo previo a ejecución); en reporte de bug incluir hipótesis breve (5-7 palabras). Si falta `overview/` o uno de esos archivos, crearlo desde `.agents/templates/`. Si falta `overview/architecture.md`, crearlo desde su plantilla. Al finalizar `$boot`, ejecutar el protocolo `overview/work_review.md`.
+>>>>>>> d55316b03e7586d1fbcfb117550721f2b8c07a17
 
 Las reglas globales viven solo en `.agents/`. Si el agente no descubre `.agents/AGENTS.md`, instalar adaptador mínimo desde `.agents/adapters/`; nunca duplicar reglas. Al editar este repositorio oficial directamente, usar rutas locales equivalentes (`core/`, `templates/`, etc.).
 
@@ -31,11 +35,21 @@ Las reglas globales viven solo en `.agents/`. Si el agente no descubre `.agents/
 Crear `overview/` desde `.agents/templates/` al iniciar proyecto de juego. Al inicio y cierre, cargar/actualizar:
 
 - `overview/session.md`
-- `overview/work.md`
+- `overview/work.md` (índice maestro)
+- `overview/work/tasks.md` (tarea activa: tipo, solución/rutas)
+- `overview/work/pendientes.md` (seguimiento al cerrar)
+- `overview/work/deuda_tecnica.md` (deuda ordenada por prioridad Alta, Media y Baja)
+- `overview/work_review.md` (protocolo de auditoría `$boot`)
+- `overview/workflows/` (guías por flujo con terminología 100% agnóstica)
 - `overview/trackers/progress.md`
+<<<<<<< HEAD
 - `overview/architecture.md` (Estructura de Escenas, Autoloads, Nodos y Sistemas Godot)
 - `docs/lore/` (Arbol Narrativo, Misiones, Personajes, Worldbuilding, Diálogos - Documentación viva del proyecto)
 - `overview/context/` para archivos suplementarios del agente
+=======
+- `overview/trackers/architecture.md` cuando aplique
+- `overview/context/` para archivos de contexto general no mapeables
+>>>>>>> d55316b03e7586d1fbcfb117550721f2b8c07a17
 - `overview/learning.md` cuando surja mejora candidata
 
 > **Separación estricta y Proyectos Híbridos**: `overview/` es exclusivo para el estado interno del agente. Documentación y lore deben alojarse en `docs/`. Proyectos sin código inicial deben inicializar raíz `game/` o `src/` y `docs/`.

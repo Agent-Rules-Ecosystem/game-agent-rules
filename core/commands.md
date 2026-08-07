@@ -28,13 +28,14 @@ Dispara el bootstrap completo. Equivalente a **"ejecuta .agents"** pero más cor
 Pasos que el agente debe ejecutar:
 1. Leer `core/path_map.md`, `core/communication.md`, `core/brain.md`, `core/commands.md`.
 2. Verificar si existe `overview/` — si no, crear desde `templates/`.
-3. Cargar `overview/session.md`, `overview/work.md`, `overview/trackers/progress.md`.
+3. Cargar `overview/session.md`, `overview/work.md`, `overview/work/tasks.md`, `overview/work/deuda_tecnica.md`, `overview/work/pendientes.md`, `overview/trackers/progress.md`.
 4. Detectar si el `Agente:` en `session.md` difiere del modelo actual → si difiere, activar protocolo `## Handoff de Agente` de `brain.md`.
-5. Alias divergentes: si alias y canónico coexisten con contenido distinto → flag `[consolidar alias]` en `work.md`.
+5. Alias divergentes: si alias y canónico coexisten con contenido distinto (`tasks.md`/`work.md`, `tracker.md`/`trackers/architecture.md`) → flag `[consolidar alias]` en `work.md`.
 6. `session.md` legado: si faltan `Agente:`, `## Reanudar` o `## Cambios` → reportar `session legado` (sin migrar automático).
-7. Auditoría de líneas: listar archivos de código fuente >250L; sugerir IDs `deuda` en `work.md`.
-8. Auditar `overview/learning.md`: promover mejoras ya implementadas al Histórico.
-9. Reportar en 5 líneas máximo: agente anterior, nodo activo, tareas pendientes, estado validación, flags (alias/session/líneas), próximo paso.
+7. Auditoría de líneas: listar archivos de código fuente >250L; sugerir IDs `deuda` en `overview/work/deuda_tecnica.md` (prioridades **Alta**, **Media**, **Baja**).
+8. Auditar `overview/learning.md` (Evaluación de 3 Vías): promover aplicadas al Histórico, eliminar/marcar rechazadas y flag `[conflicto learning]` si hay choque con el Core.
+9. **Revisión de Trabajo (`work_review.md`)**: Ejecutar el protocolo de revisión de `overview/work/` respetando prioridades (1º `tasks.md`, 2º `pendientes.md`, 3º `deuda_tecnica.md`) según `templates/work_review.md`.
+10. Reportar en 5 líneas máximo: agente anterior, nodo activo, tareas pendientes, estado validación, flags (alias/session/líneas/conflicto), síntesis de `work_review` y próximo paso.
 
 ---
 
@@ -56,6 +57,7 @@ Próximo paso  : [## Reanudar de session.md]
 ### `$close`
 
 Protocolo de cierre de sesión. El agente debe:
+<<<<<<< HEAD
 1. Validar sintaxis GDScript o estado de escenas cuando aplique.
 2. Actualizar `overview/work.md` con cambios de gameplay/lore de la sesión.
 3. Actualizar `overview/session.md`:
@@ -66,6 +68,19 @@ Protocolo de cierre de sesión. El agente debe:
 5. Si hay sesiones antiguas irrelevantes → archivar en `overview/history/`.
 6. Si hay mejora candidata identificada → agregar a `overview/learning.md`.
 7. Reportar: `Sesión cerrada. Próximo: [nodo/misión]. Estado: [verificado/no verificado/no aplica].`
+=======
+1. Ejecutar `flutter analyze` si aplica. Suite de tests: ausente (sin carpeta `test/`) → `no aplica`; presente y no corrida/fallida → `no verificado` + motivo. Si la tarea implica build o release → consultar `.agents/knowledge/release_checklist.md`.
+2. Registrar ítems o tareas secundarias identificadas durante la ejecución en `overview/work/pendientes.md`.
+3. Actualizar índice maestro `overview/work.md` con cambios de la sesión y trasladar ítems/deudas resueltas a `## ✅ Completados (Historial)` conservando su ID.
+4. Actualizar `overview/session.md`:
+   - Registrar `Agente:` con firma propia.
+   - Completar `## Cambios` con lo trabajado.
+   - Completar `## Reanudar` con el siguiente nodo y contexto crítico.
+5. Actualizar `overview/trackers/progress.md`.
+6. Si hay sesiones antiguas irrelevantes → archivar en `overview/history/`.
+7. Si hay mejora candidata identificada → agregar a `overview/learning.md`.
+8. Reportar: `Sesión cerrada. Próximo: [nodo]. Estado: [verificado/no verificado/no aplica].`
+>>>>>>> d55316b03e7586d1fbcfb117550721f2b8c07a17
 
 ---
 
@@ -92,30 +107,47 @@ $learn Usar EventBus Autoload para desacoplar emisiones de daño entre personaje
 Abstraer un aprendizaje candidato descontextualizando el proyecto antes de registrar.
 
 El agente debe:
+<<<<<<< HEAD
 1. Sustituir nombres propios de juego/personajes/rutas por términos genéricos de arquitectura (entidad, FSM, inventario, nodo narrativo, quest manager, etc.).
 2. Eliminar IDs de misiones, personajes concretos y paths de proyecto.
+=======
+1. Sustituir nombres propios de app/módulo/ruta y términos específicos de negocio (ej. joyas, mascotas, inventarios) por términos genéricos de arquitectura agnósticos (entidad, procesamiento, capa, destino, persistencia, navegación, etc.).
+2. Eliminar IDs de negocio, pantallas concretas y paths de proyecto.
+>>>>>>> d55316b03e7586d1fbcfb117550721f2b8c07a17
 3. Aplicar **Filtro Agnóstico** (`brain.md`) al texto resultante.
 4. Registrar el bullet abstraído en `overview/learning.md` bajo `## 📌 Propuestas de mejora` (crear desde plantilla si falta).
 5. Confirmar: `Aprendizaje agnóstico registrado.` + mostrar una línea con el texto final.
 
 Ejemplo:
 ```
+<<<<<<< HEAD
 $learnagnostico En Eldoria la bandera de decisión Acto1_AliadoBosque debe sincronizarse con el QuestResource
 ```
 → bullet: `Sincronizar banderas de decisiones narrativas con los recursos (.tres) de misiones a través de un Singleton de estado.`
+=======
+$learnagnostico En MóduloX el flujo Entrada→Inventario→Salida debe documentarse aparte de architecture
+```
+→ bullet: `Documentar flujos de dominio (origen → procesamiento → destino) en overview/workflows/, no en architecture.md.`
+>>>>>>> d55316b03e7586d1fbcfb117550721f2b8c07a17
 
 ---
 
 ### `$work [descripción]`
 
+<<<<<<< HEAD
 Registrar una nueva tarea, bug o nodo de lore en `overview/work.md`.
+=======
+Registrar una nueva tarea o bug en el sistema de trabajo modular `overview/work/`.
+>>>>>>> d55316b03e7586d1fbcfb117550721f2b8c07a17
 
 El agente debe:
 1. Determinar tipo: `tarea` (feature/gameplay), `lore` (diseño de historia/misiones/dialogos), `bug` (comportamiento inesperado) o `deuda`.
 2. Generar el próximo ID correlativo (ej. `w4` si el último es `w3`).
-3. Agregar fila **solo** en la tabla principal de `work.md` con estado `pendiente` (nunca en alias `tasks.md`).
-4. Si es un bug: agregar entrada vacía en `## 📋 Historial de Intentos` con header `### [ID] [descripción]`.
-5. Confirmar: `Registrado como [ID] en work.md.`
+3. Registrar en `overview/work/tasks.md`: indicar la tarea a iniciar, clasificarla (`problema`, `mejora`, `refactor`) y redactar hipótesis/soluciones planteadas.
+4. Agregar fila en el índice maestro `overview/work.md` con el ID, tipo y estado `pendiente`.
+5. **Mapeo incremental de arquitectura**: Actualizar `overview/architecture.md` **únicamente con los nodos** (pantallas, clases, providers, repos) que la tarea concretamente va a tocar (sin sweep completo del repo).
+6. Si es un bug: agregar entrada vacía en `## 📋 Historial de Intentos` en `work.md` con header `### [ID] [descripción]`.
+7. Confirmar: `Registrado como [ID] en work.md, mapeado en architecture.md y configurado en overview/work/tasks.md.`
 
 Ejemplo de uso:
 ```

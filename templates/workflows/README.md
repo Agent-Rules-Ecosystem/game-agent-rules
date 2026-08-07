@@ -2,14 +2,14 @@
 
 Guías por flujo de negocio (pasos ordenados). **No** sustituye `architecture.md` (mapa técnico) ni `context/` (datos/referencia).
 
-Crear un archivo por flujo, ej. `entrada_inventario.md`:
+Crear un archivo por flujo, ej. `flujo_procesamiento_datos.md`:
 
 ```markdown
-# Flujo: [nombre genérico]
+# Flujo: [nombre genérico de arquitectura]
 
-1. Entrada / captura
-2. Inventario / persistencia
-3. Transformación / producción
+1. Captura / Origen
+2. Procesamiento / Persistencia
+3. Salida / Transformación
 ```
 
-Solo documentar flujos que el trabajo actual toque; evitar inventarios exhaustivos al bootstrap.
+Solo documentar flujos que el trabajo actual toque; evitar mapeos exhaustivos no requeridos en el bootstrap.
