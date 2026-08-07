@@ -46,7 +46,8 @@ Cuando el usuario escribe **"ejecuta .agents"** (o variante como "corre .agents"
 - Leer core y `overview/session.md`, `overview/work.md`, `overview/trackers/progress.md`.
 - Si falta `overview/` o archivos base, crearlos desde `.agents/templates/`.
 - Si falta `overview/architecture.md`, crearlo desde la plantilla de arquitectura Godot.
-- Si falta la carpeta `overview/lore/` o sus plantillas (`narrative_tree.md`, `worldbuilding.md`, `characters.md`, `quests.md`), crearlos desde `.agents/templates/lore/`.
+- Si falta la carpeta `docs/lore/` o sus documentos narrativos (`narrative_tree.md`, `worldbuilding.md`, `characters.md`, `quests.md`), crearlos o copiarlos desde `.agents/templates/lore/` hacia `docs/lore/`.
+- **Separación de responsabilidades**: `overview/` es exclusivo para control interno del agente. Documentación y lore del proyecto viven en `docs/`.
 - **Alias divergentes**: si coexisten pares alias/canónico (`tasks.md`/`work.md`, `tracker.md`/`architecture.md`, `memory_session.md`/`session.md`) con contenido distinto → flag `[consolidar alias]` en `work.md`; no asumir cuál manda sin diff.
 - **Auditoría de líneas GDScript**: listar scripts `.gd` >250L; sugerir IDs `deuda` en `work.md`.
 - **Registro preventivo previo a ejecución (Pre-execution Work Logging)**: Al recibir un requerimiento, bug o adición de lore, actualizar `overview/work.md` y `overview/session.md` INMEDIATAMENTE antes de ejecutar cualquier acción. En caso de reporte de bug de juego, incluir hipótesis breve de causa raíz (5-7 palabras).
@@ -62,14 +63,16 @@ Cuando el usuario escribe **"ejecuta .agents"** (o variante como "corre .agents"
    - `resources/` o `res://resources/` (Recursos personalizados `.tres` / datos de juego)
    - `autoload/` o `res://autoload/` (Singletons de estado global, EventBus, Audio, DialogueManager)
    - `assets/` (Sprites, modelos 3D, audio, fuentes)
-3. **Mapeo de Lore y Narrativa (`overview/lore/`)**:
-   - **Arbol Narrativo (`narrative_tree.md`)**: Actos, Capítulos, Nodos de historia, Banderas/Flags globales (`game_story_flags`).
-   - **Worldbuilding (`worldbuilding.md`)**: Historia antigua, Cosmología, Regiones, Sistemas de magia/tecnología, Facciones.
-   - **Fichas de Personajes (`characters.md`)**: Protagonistas, NPCs, Antagonistas, motivación, arcos y estilos de diálogo.
-   - **Misiones / Quests (`quests.md`)**: Misiones principales y secundarias, detonantes, objetivos, decisiones y recompensas.
-   - **Árboles de Diálogo (`dialogues.md`)**: Estructura de conversación y sus conectores con recursos o complementos (Dialogue Manager/Dialogic).
-4. **Lectura activa de contexto (`overview/context/`)**: Inspeccionar automáticamente documentos suplementarios de diseño de juego (Game Design Document - GDD, bibliografía de lore, referencias artísticas).
-5. **Guardrail de tokens en discovery inicial:** leer máx 5 archivos de GDScript/escenas en el primer sweep; expandir solo cuando la tarea lo requiera explícitamente.
+3. **Mapeo de Documentación Viva y Lore (`docs/`)**:
+   - Toda la documentación viva del proyecto, bibliografía del mundo, diseño y lore narrativo accesible para el usuario/equipo debe alojarse exclusivamente en `docs/` (ej. `docs/lore/`, `docs/gdd/`, `docs/architecture/`), manteniendo `overview/` estricto y exclusivo para el estado interno y plantillas de trabajo del agente (`session.md`, `work.md`, `trackers/`, etc.).
+   - Estructura recomendada en `docs/lore/`: `narrative_tree.md`, `worldbuilding.md`, `characters.md`, `quests.md`, `dialogues.md`, `factions.md`.
+4. **Protocolo de Inicialización de Proyectos Híbridos (Juego/Docs)**:
+   - Al inicializar o bootstrapear proyectos sin código fuente inmediato (ej. Godot / Game Engine o proyectos puramente narrativos/técnicos), crear automáticamente la estructura raíz:
+     - `game/` o `src/`: carpeta de código fuente.
+     - `docs/`: carpeta de documentación de dominio, GDD y lore.
+   - Garantizar que los documentos de diseño o lore se ubiquen en `docs/` y NUNCA se mezclen ni contaminen la taxonomía de trabajo interno en `overview/`.
+5. **Lectura activa de contexto (`docs/` y `overview/context/`)**: Inspeccionar automáticamente los documentos de diseño y lore en `docs/` y notas suplementarias.
+6. **Guardrail de tokens en discovery inicial:** leer máx 5 archivos de GDScript/escenas en el primer sweep; expandir solo cuando la tarea lo requiera explícitamente.
 
 ### Reglas de Arquitectura y Código GDScript 2.0
 
@@ -94,7 +97,7 @@ Cuando el Agente que retoma una sesión es distinto al que la inició (diferente
 ## Cierre
 
 - Ejecutar validación de GDScript o verificación de sintaxis de escenas cuando aplique.
-- Actualizar trackers, mapas de lore (`overview/lore/`), estado de arquitectura Godot (`overview/architecture.md`) y trabajo (`overview/work.md`).
+- Actualizar trackers, mapas de lore (`docs/lore/`), estado de arquitectura Godot (`overview/architecture.md`) y trabajo (`overview/work.md`).
 - Registrar causa raíz y solución firmada para cualquier bug resuelto.
 - Proponer aprendizajes candidatos al core mediante **Filtro Agnóstico**.
 

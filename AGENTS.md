@@ -22,7 +22,7 @@ Antes de responder o editar, leer y cumplir:
 - Primer mensaje de conversación cuando el proyecto tiene `.agents/` pero no `overview/`.
 - Cualquier mensaje que comience con `$` → reconocer como $-comando según `core/commands.md` y ejecutar el protocolo correspondiente.
 
-Para cualquier tarea que inspeccione o cambie código GDScript (`.gd`, `.tscn`), escenas o documentos de historia/lore, cargar previamente `overview/session.md`, `overview/work.md` y `overview/trackers/progress.md`. Actualizar `overview/work.md` y `overview/session.md` INMEDIATAMENTE antes de ejecutar (Registro preventivo previo a ejecución); en reporte de bug incluir hipótesis breve (5-7 palabras). Si falta `overview/` o uno de esos archivos, crearlo desde `.agents/templates/`. Si falta `overview/architecture.md` o la carpeta `overview/lore/`, crearlos desde sus plantillas correspondientes.
+Para cualquier tarea que inspeccione o cambie código GDScript (`.gd`, `.tscn`), escenas o documentos de historia/lore, cargar previamente `overview/session.md`, `overview/work.md` y `overview/trackers/progress.md`. Actualizar `overview/work.md` y `overview/session.md` INMEDIATAMENTE antes de ejecutar (Registro preventivo previo a ejecución); en reporte de bug incluir hipótesis breve (5-7 palabras). Si falta `overview/` o uno de esos archivos, crearlo desde `.agents/templates/`. Si falta `overview/architecture.md` o los documentos de lore en `docs/lore/`, crearlos desde sus plantillas correspondientes.
 
 Las reglas globales viven solo en `.agents/`. Si el agente no descubre `.agents/AGENTS.md`, instalar adaptador mínimo desde `.agents/adapters/`; nunca duplicar reglas. Al editar este repositorio oficial directamente, usar rutas locales equivalentes (`core/`, `templates/`, etc.).
 
@@ -34,9 +34,11 @@ Crear `overview/` desde `.agents/templates/` al iniciar proyecto de juego. Al in
 - `overview/work.md`
 - `overview/trackers/progress.md`
 - `overview/architecture.md` (Estructura de Escenas, Autoloads, Nodos y Sistemas Godot)
-- `overview/lore/` (Arbol Narrativo, Misiones, Personajes, Worldbuilding, Diálogos)
-- `overview/context/` para archivos de dominio o bibliografía del mundo no mapeables
+- `docs/lore/` (Arbol Narrativo, Misiones, Personajes, Worldbuilding, Diálogos - Documentación viva del proyecto)
+- `overview/context/` para archivos suplementarios del agente
 - `overview/learning.md` cuando surja mejora candidata
+
+> **Separación estricta y Proyectos Híbridos**: `overview/` es exclusivo para el estado interno del agente. Documentación y lore deben alojarse en `docs/`. Proyectos sin código inicial deben inicializar raíz `game/` o `src/` y `docs/`.
 
 `overview/history/` conserva sesiones antiguas. Cambios a reglas globales solo ocurren en repositorio oficial con aprobación del propietario.
 

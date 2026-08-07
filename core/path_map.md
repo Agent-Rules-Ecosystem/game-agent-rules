@@ -24,17 +24,26 @@
 | Aprendizajes | `overview/learning.md` | Al cerrar |
 | Arquitectura Godot | `overview/architecture.md` | Al iniciar |
 | Progreso | `overview/trackers/progress.md` | Inicio/cierre |
-| **Arbol Narrativo** | `overview/lore/narrative_tree.md` | Inicio/Bajo demanda |
-| **Worldbuilding** | `overview/lore/worldbuilding.md` | Bajo demanda |
-| **Personajes** | `overview/lore/characters.md` | Bajo demanda |
-| **Misiones / Quests** | `overview/lore/quests.md` | Bajo demanda |
-| **Diálogos / Nodos** | `overview/lore/dialogues.md` | Bajo demanda |
-| **Facciones / Matrices**| `overview/lore/factions.md` | Bajo demanda |
 | Historial | `overview/history/` | Al resumir |
-| Contexto de dominio | `overview/context/` | Inicio/bajo demanda |
-| Flujos de dominio | `overview/workflows/` | Bajo demanda |
+| Contexto de agente | `overview/context/` | Inicio/bajo demanda |
+| Flujos de agente | `overview/workflows/` | Bajo demanda |
 
-> `overview/lore/` contiene la arquitectura completa de la historia: mapa de nodos narrativos, worldbuilding, relaciones de facciones, fichas de personajes, misiones principales/secundarias y árboles de diálogo que conectan con los scripts/recursos (`.tres`) de Godot.
+## Documentación viva del proyecto / Lore: `docs/`
+
+| Recurso | Ruta | Carga |
+|---|---|---|
+| **Arbol Narrativo** | `docs/lore/narrative_tree.md` | Inicio/Bajo demanda |
+| **Worldbuilding** | `docs/lore/worldbuilding.md` | Bajo demanda |
+| **Personajes** | `docs/lore/characters.md` | Bajo demanda |
+| **Misiones / Quests** | `docs/lore/quests.md` | Bajo demanda |
+| **Diálogos / Nodos** | `docs/lore/dialogues.md` | Bajo demanda |
+| **Facciones / Matrices**| `docs/lore/factions.md` | Bajo demanda |
+| **GDD / Diseño** | `docs/gdd/` | Bajo demanda |
+
+> [!IMPORTANT]
+> **Separación estricta de responsabilidades**: `overview/` es un espacio exclusivo para el estado interno y control del agente (`session.md`, `work.md`, `trackers/`, etc.). La documentación viva del proyecto, GDD y lore deben alojarse en `docs/` para evitar contaminación de la taxonomía del agente.
+
+> `docs/lore/` contiene la arquitectura viva de la historia del proyecto: mapa de nodos narrativos, worldbuilding, relaciones de facciones, fichas de personajes, misiones principales/secundarias y árboles de diálogo que conectan con los scripts/recursos (`.tres`) de Godot.
 
 > `overview/context/` conserva archivos suplementarios (concept art markdown, bibliografía del lore, notas de producción, changelogs narrativos).
 
