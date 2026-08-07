@@ -1,51 +1,32 @@
-# Estilo Flutter / Dart
+# Estilo de Código GDScript 2.0 y Convenciones en Godot 4
 
-## Widgets y archivos
+## GDScript y Archivos
 
-- Usar `const` cuando aplique.
-- Mantener archivos Dart idealmente bajo 250 líneas; máximo 300.
-- Extraer widgets o diálogos extensos de pantallas principales.
-- Liberar `TextEditingController`, `AnimationController` y `StreamSubscription`.
-- Centralizar estado con patrón elegido por proyecto. Si usa Riverpod, separar vista de providers/notifiers.
-- En `DropdownButtonFormField`, usar `initialValue`; evitar `value` deprecado.
+- **Tipado Estático Obligatorio**: Usar siempre anotaciones de tipo (`var health: int = 100`, `func heal(amount: int) -> void:`).
+- **Límite de Líneas**: Mantener scripts `.gd` idealmente bajo 250 líneas; máximo 300 líneas. Extraer componentes a nodos hijo o Recursos (`.tres`).
+- **Nodos y `@onready`**: Inicializar referencias a nodos hijo usando `@onready var sprite: Sprite2D = $Sprite2D`.
+- **Señales**: Definir señales en la parte superior del script con tipos explícitos (`signal health_changed(new_health: int)`).
 
-## Nombrado
+## Nombrado y Convenciones
 
 | Elemento | Convención | Ejemplo |
 |---|---|---|
-| Clases / Widgets | `PascalCase` | `UserProfileCard` |
-| Archivos Dart | `snake_case` | `user_profile_card.dart` |
-| Variables / métodos | `camelCase` | `fetchUserData()` |
-| Constantes | `camelCase` con `const` | `const defaultTimeout` |
-| Providers (Riverpod) | `camelCaseProvider` | `authStateProvider` |
-| Enums | `PascalCase`, valores `camelCase` | `enum Status { loading, done }` |
+| Clases / `class_name` | `PascalCase` | `class_name PlayerController` |
+| Archivos GDScript | `snake_case` | `player_controller.gd` |
+| Archivos de Escenas | `snake_case` | `main_menu.tscn` |
+| Variables / Métodos | `snake_case` | `var move_speed: float = 200.0`, `func take_damage()` |
+| Constantes | `ALL_CAPS_SNAKE` | `const MAX_HEALTH: int = 100` |
+| Señales | `snake_case` (pasado) | `signal player_died`, `signal item_collected(item)` |
+| Enums | `PascalCase`, valores `ALL_CAPS` | `enum State { IDLE, RUN, ATTACK }` |
 
-- Nombres descriptivos. Evitar: `data`, `info`, `temp`, `val` sin contexto.
-- Prefijo `_` solo para privados de clase, no para variables locales.
+## Patrones de Código en Godot
 
-## Async / Await
-
-- Preferir `async`/`await` sobre `.then()` encadenado para legibilidad.
-- Usar `FutureBuilder` solo cuando el `Future` sea local al build. Para estado global → provider/notifier.
-- No usar `await` en `initState`; usar `Future.microtask(() => ...)` o manejar en el provider.
-- Siempre manejar el caso `AsyncError` en `FutureBuilder` / `AsyncValue`.
-
-## Manejo de errores
-
-- Nunca silenciar errores con `catch (e) {}` vacío. Mínimo: loguear con `debugPrint`.
-- Usar tipos de error específicos del dominio; evitar `Exception` genérica en lógica de negocio.
-- En UI: mostrar `SnackBar` o diálogo — nunca dejar error silencioso al usuario.
-- Separar errores de red, de validación y de negocio en capas distintas.
-
-## Navegación
-
-- Usar el sistema de rutas del proyecto (GoRouter / Navigator 2 / Navigator 1 — según proyecto).
-- No mezclar estilos de navegación en el mismo proyecto.
-- Pasar solo datos serializables por rutas nominadas. Objetos complejos → provider compartido.
-- `context.pop()` con resultado en diálogos/sheets; no usar `Navigator.of(context).pop()` directamente si el proyecto usa GoRouter.
-
-## Nulabilidad
-
-- Activar null-safety (`dart>=2.12`). No usar `!` sin estar seguro del valor.
-- Preferir `??` y `?.` sobre comprobaciones `if (x != null)` verbosas.
-- Evitar `late` salvo en campos inicializados en `initState` con justificación clara.
+1. **"Call Down, Signal Up"**:
+   - Los nodos superiores llaman a métodos del hijo (`$Weapon.attack()`).
+   - Los nodos inferiores emiten señales hacia arriba (`signal_hit.emit()`).
+2. **Máquina de Estados (State Machine)**:
+   - Encapsular estados en scripts o nodos heredados de `State`. Evitar `if/elif/else` gigantes en `_process` o `_physics_process`.
+3. **EventBus Centralizado (Autoload)**:
+   - Usar `EventBus.gd` para eventos globales del juego que conectan sistemas desacoplados (Gameplay ↔ UI ↔ Lore Manager).
+4. **Resources (`.tres`) para Datos**:
+   - Definir datos de items, estadísticas y misiones en subclases de `Resource`. Cargar con `preload()` o `load()`.

@@ -56,16 +56,16 @@ Próximo paso  : [## Reanudar de session.md]
 ### `$close`
 
 Protocolo de cierre de sesión. El agente debe:
-1. Ejecutar `flutter analyze` si aplica. Suite de tests: ausente → `no aplica`; presente y no corrida/fallida → `no verificado` + motivo.
-2. Actualizar `overview/work.md` con cambios de la sesión.
+1. Validar sintaxis GDScript o estado de escenas cuando aplique.
+2. Actualizar `overview/work.md` con cambios de gameplay/lore de la sesión.
 3. Actualizar `overview/session.md`:
    - Registrar `Agente:` con firma propia.
-   - Completar `## Cambios` con lo trabajado.
-   - Completar `## Reanudar` con el siguiente nodo y contexto crítico.
-4. Actualizar `overview/trackers/progress.md`.
+   - Completar `## Cambios` con lo trabajado en código o historia.
+   - Completar `## Reanudar` con el siguiente nodo/misión y contexto crítico.
+4. Actualizar `overview/trackers/progress.md` y archivos de `overview/lore/` modificados.
 5. Si hay sesiones antiguas irrelevantes → archivar en `overview/history/`.
 6. Si hay mejora candidata identificada → agregar a `overview/learning.md`.
-7. Reportar: `Sesión cerrada. Próximo: [nodo]. Estado: [verificado/no verificado/no aplica].`
+7. Reportar: `Sesión cerrada. Próximo: [nodo/misión]. Estado: [verificado/no verificado/no aplica].`
 
 ---
 
@@ -82,7 +82,7 @@ El agente debe:
 
 Ejemplo de uso:
 ```
-$learn Siempre inicializar GoRouter fuera del widget tree para evitar rebuilds
+$learn Usar EventBus Autoload para desacoplar emisiones de daño entre personajes y UI en Godot
 ```
 
 ---
@@ -92,26 +92,26 @@ $learn Siempre inicializar GoRouter fuera del widget tree para evitar rebuilds
 Abstraer un aprendizaje candidato descontextualizando el proyecto antes de registrar.
 
 El agente debe:
-1. Sustituir nombres propios de app/módulo/ruta por términos genéricos de arquitectura (entidad, flujo, capa, inventario, persistencia, navegación, etc.).
-2. Eliminar IDs de negocio, pantallas concretas y paths de proyecto.
+1. Sustituir nombres propios de juego/personajes/rutas por términos genéricos de arquitectura (entidad, FSM, inventario, nodo narrativo, quest manager, etc.).
+2. Eliminar IDs de misiones, personajes concretos y paths de proyecto.
 3. Aplicar **Filtro Agnóstico** (`brain.md`) al texto resultante.
 4. Registrar el bullet abstraído en `overview/learning.md` bajo `## 📌 Propuestas de mejora` (crear desde plantilla si falta).
 5. Confirmar: `Aprendizaje agnóstico registrado.` + mostrar una línea con el texto final.
 
 Ejemplo:
 ```
-$learnagnostico En JoyasApp el flujo Oro→Inventario→Fundición debe documentarse aparte de architecture
+$learnagnostico En Eldoria la bandera de decisión Acto1_AliadoBosque debe sincronizarse con el QuestResource
 ```
-→ bullet: `Documentar flujos de dominio (entidad → inventario → transformación) en overview/workflows/, no en architecture.md.`
+→ bullet: `Sincronizar banderas de decisiones narrativas con los recursos (.tres) de misiones a través de un Singleton de estado.`
 
 ---
 
 ### `$work [descripción]`
 
-Registrar una nueva tarea o bug en `overview/work.md`.
+Registrar una nueva tarea, bug o nodo de lore en `overview/work.md`.
 
 El agente debe:
-1. Determinar tipo: `tarea` (mejora/feature), `bug` (comportamiento inesperado) o `deuda`.
+1. Determinar tipo: `tarea` (feature/gameplay), `lore` (diseño de historia/misiones/dialogos), `bug` (comportamiento inesperado) o `deuda`.
 2. Generar el próximo ID correlativo (ej. `w4` si el último es `w3`).
 3. Agregar fila **solo** en la tabla principal de `work.md` con estado `pendiente` (nunca en alias `tasks.md`).
 4. Si es un bug: agregar entrada vacía en `## 📋 Historial de Intentos` con header `### [ID] [descripción]`.
@@ -119,8 +119,12 @@ El agente debe:
 
 Ejemplo de uso:
 ```
-$work bug: el drawer no cierra al navegar con GoRouter en iOS
+$work lore: Diseñar arbol de dialogo para el guardián de las ruinas en Acto 2
 ```
+```
+$work bug: El CharacterBody2D atraviesa la colisión al realizar el dash
+```
+
 
 ---
 

@@ -1,38 +1,49 @@
-# Flutter Agent Rules
+# Game Dev & Lore Agent Rules (Godot Engine)
 
-Repositorio centralizado: cerebro operativo para proyectos Flutter. Reduce ruido/tokens, conserva continuidad y exige calidad verificable. Se instala como submódulo `.agents/`; reglas globales son independientes del proyecto.
+Repositorio centralizado: cerebro operativo para desarrollo de juegos en Godot 4 (GDScript) y mapeo estructurado de historias, lore y sistemas narrativos.
 
 ## Qué aporta
 
-1. **Comunicación concisa** — modo cavernícola + ahorro de tokens sin bajar calidad técnica.
-2. **Trackers separados** — arquitectura, trabajo, progreso y contenido por agente.
-3. **Memoria versionada** — sesión con firma de Agente, historial de intentos incremental y aprendizajes candidatos.
-4. **Handoff de Agente** — protocolo para cambiar de modelo sin perder estado ni repetir trabajo fallido.
-5. **Historial de intentos firmado** — cada bug registra quién intentó qué y quién lo resolvió, con causa raíz y solución.
-6. **$-Comandos** — atajos explícitos (`$boot`, `$status`, `$close`, `$learn`, `$learnagnostico`, `$work`) para disparar protocolos cuando el bootstrap automático falla o es incompleto.
-7. **Validación explícita** — `verificado`, `no verificado` o `conflicto`; nunca presentar como validado sin evidencia.
-8. **Adaptadores mínimos** — Codex, Claude, Gemini/Antigravity y Cursor; sin duplicar reglas.
+1. **Mapeo Integrado de Lore y Narrativa (`overview/lore/`)**:
+   - Árbol narrativo, actos, ramas de decisión y banderas de historia (`game_story_flags`).
+   - Worldbuilding, cosmología, facciones, fichas de personajes y misiones.
+   - Conexión directa entre nodos de diálogo y código GDScript / Recursos `.tres` de Godot.
+2. **Estándar de Desarrollo en Godot 4 (GDScript 2.0)**:
+   - Tipado estático obligatorio, patrón EventBus, composición de nodos ("Call down, Signal up") y máquinas de estado (FSM).
+3. **Comunicación Concisa (Modo Cavernícola)** — Respuestas breves y ahorro de tokens.
+4. **Memoria Versionada y Handoff de Agente**:
+   - Sesión con firma de agente, historial de intentos firmado por fecha y modelo.
+5. **$-Comandos**:
+   - `$boot`, `$status`, `$close`, `$learn`, `$learnagnostico`, `$work` para operar de forma inmediata.
 
-## Instalación
+## Instalación en tu Proyecto de Juego
 
 ```bash
-git submodule add https://github.com/xolotl-hub/flutter-agent-rules.git .agents
+git submodule add https://github.com/xolotl-hub/game-agent-rules.git .agents
 ```
 
-Instalar adaptador de `.agents/adapters/` que reconozca el agente. En el **proyecto Flutter**, crear `overview/` desde `.agents/templates/` (`$boot`). El submódulo `.agents/` no versiona `overview/`: solo plantillas y reglas.
+Instalar el adaptador de `.agents/adapters/` adecuado para tu entorno (Claude, Gemini, Cursor). En tu proyecto de Godot, inicializar `overview/` desde `.agents/templates/` (o escribir `$boot`).
 
-## Uso rápido
+## Estructura de Lore (`overview/lore/`)
+
+```
+overview/lore/
+├── narrative_tree.md    # Árbol narrativo y banderas de decisión
+├── worldbuilding.md     # Universo, eras, geografía y leyes
+├── characters.md        # Fichas de personajes y arcos
+├── quests.md            # Misiones principales y secundarias
+├── dialogues.md         # Nodos de conversación
+└── factions.md          # Facciones y diplomacia
+```
+
+## Uso Rápido de Comandos
 
 | Escribir | Resultado |
 |---|---|
-| `$boot` | Bootstrap completo + handoff si cambió el agente |
-| `$status` | Estado actual en 5 líneas |
-| `$close` | Cierre de sesión con validación |
-| `$learn [texto]` | Registrar aprendizaje candidato |
-| `$learnagnostico [texto]` | Abstraer y registrar aprendizaje genérico |
-| `$work [descripción]` | Registrar tarea o bug nuevo |
-| `ejecuta .agents` | Bootstrap completo + auditoría de learning |
-
-## Contenido contrastado
-
-Cada agente registra datos en su tracker. Un dato es `verificado` cuando al menos dos coinciden, las fuentes son compatibles y no hay conflicto abierto. Registro final: dato, valor, fuentes, fecha y estado.
+| `$boot` | Bootstrap completo del juego + mapeo de Godot y Lore |
+| `$status` | Resumen del estado actual técnico y narrativo |
+| `$close` | Cierre de sesión y verificación de GDScript / Lore |
+| `$learn [texto]` | Registrar aprendizaje candidato del core |
+| `$learnagnostico [texto]` | Abstraer y registrar regla genérica de juego/lore |
+| `$work [descripción]` | Registrar nueva tarea, bug o nodo de lore |
+| `ejecuta .agents` | Bootstrap completo + auditoría de aprendizajes |
