@@ -57,7 +57,6 @@ Próximo paso  : [## Reanudar de session.md]
 ### `$close`
 
 Protocolo de cierre de sesión. El agente debe:
-<<<<<<< HEAD
 1. Validar sintaxis GDScript o estado de escenas cuando aplique.
 2. Actualizar `overview/work.md` con cambios de gameplay/lore de la sesión.
 3. Actualizar `overview/session.md`:
@@ -68,19 +67,6 @@ Protocolo de cierre de sesión. El agente debe:
 5. Si hay sesiones antiguas irrelevantes → archivar en `overview/history/`.
 6. Si hay mejora candidata identificada → agregar a `overview/learning.md`.
 7. Reportar: `Sesión cerrada. Próximo: [nodo/misión]. Estado: [verificado/no verificado/no aplica].`
-=======
-1. Ejecutar `flutter analyze` si aplica. Suite de tests: ausente (sin carpeta `test/`) → `no aplica`; presente y no corrida/fallida → `no verificado` + motivo. Si la tarea implica build o release → consultar `.agents/knowledge/release_checklist.md`.
-2. Registrar ítems o tareas secundarias identificadas durante la ejecución en `overview/work/pendientes.md`.
-3. Actualizar índice maestro `overview/work.md` con cambios de la sesión y trasladar ítems/deudas resueltas a `## ✅ Completados (Historial)` conservando su ID.
-4. Actualizar `overview/session.md`:
-   - Registrar `Agente:` con firma propia.
-   - Completar `## Cambios` con lo trabajado.
-   - Completar `## Reanudar` con el siguiente nodo y contexto crítico.
-5. Actualizar `overview/trackers/progress.md`.
-6. Si hay sesiones antiguas irrelevantes → archivar en `overview/history/`.
-7. Si hay mejora candidata identificada → agregar a `overview/learning.md`.
-8. Reportar: `Sesión cerrada. Próximo: [nodo]. Estado: [verificado/no verificado/no aplica].`
->>>>>>> d55316b03e7586d1fbcfb117550721f2b8c07a17
 
 ---
 
@@ -107,38 +93,23 @@ $learn Usar EventBus Autoload para desacoplar emisiones de daño entre personaje
 Abstraer un aprendizaje candidato descontextualizando el proyecto antes de registrar.
 
 El agente debe:
-<<<<<<< HEAD
 1. Sustituir nombres propios de juego/personajes/rutas por términos genéricos de arquitectura (entidad, FSM, inventario, nodo narrativo, quest manager, etc.).
 2. Eliminar IDs de misiones, personajes concretos y paths de proyecto.
-=======
-1. Sustituir nombres propios de app/módulo/ruta y términos específicos de negocio (ej. joyas, mascotas, inventarios) por términos genéricos de arquitectura agnósticos (entidad, procesamiento, capa, destino, persistencia, navegación, etc.).
-2. Eliminar IDs de negocio, pantallas concretas y paths de proyecto.
->>>>>>> d55316b03e7586d1fbcfb117550721f2b8c07a17
 3. Aplicar **Filtro Agnóstico** (`brain.md`) al texto resultante.
 4. Registrar el bullet abstraído en `overview/learning.md` bajo `## 📌 Propuestas de mejora` (crear desde plantilla si falta).
 5. Confirmar: `Aprendizaje agnóstico registrado.` + mostrar una línea con el texto final.
 
 Ejemplo:
 ```
-<<<<<<< HEAD
 $learnagnostico En Eldoria la bandera de decisión Acto1_AliadoBosque debe sincronizarse con el QuestResource
 ```
 → bullet: `Sincronizar banderas de decisiones narrativas con los recursos (.tres) de misiones a través de un Singleton de estado.`
-=======
-$learnagnostico En MóduloX el flujo Entrada→Inventario→Salida debe documentarse aparte de architecture
-```
-→ bullet: `Documentar flujos de dominio (origen → procesamiento → destino) en overview/workflows/, no en architecture.md.`
->>>>>>> d55316b03e7586d1fbcfb117550721f2b8c07a17
 
 ---
 
 ### `$work [descripción]`
 
-<<<<<<< HEAD
 Registrar una nueva tarea, bug o nodo de lore en `overview/work.md`.
-=======
-Registrar una nueva tarea o bug en el sistema de trabajo modular `overview/work/`.
->>>>>>> d55316b03e7586d1fbcfb117550721f2b8c07a17
 
 El agente debe:
 1. Determinar tipo: `tarea` (feature/gameplay), `lore` (diseño de historia/misiones/dialogos), `bug` (comportamiento inesperado) o `deuda`.
