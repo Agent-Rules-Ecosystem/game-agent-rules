@@ -1,36 +1,30 @@
-# Arquitectura de Juego (Godot Engine)
+# 🏛️ Arquitectura Global del Proyecto — [Nombre del Proyecto]
 
-Mapa vivo de escenas, autoloads, nodos y sistemas del juego en Godot 4.
+> Última actualización: YYYY-MM-DD (Auditoría `$archi`: Cobertura 100% modularizada en `overview/architecture/`)
+
+## 1. Visión General y Capas del Sistema
+
+| Capa | Ubicación | Descripción Breve |
+|---|---|---|
+| **Scenes / UI** | `scenes/` | Escenas, HUD y elementos visuales |
+| **Autoloads** | `autoloads/` | Managers globales (GameManager, AudioManager) |
+| **Entities** | `entities/` | Personajes, proyectiles y objetos del mundo |
+| **Resources** | `resources/` | Datos, configs y assets de Godot |
+
+## 2. Diagrama de Estado y Persistencia Global
 
 ```mermaid
 graph TD
-    Main[Main / SceneManager] --> Level[Escena de Nivel / Level.tscn]
-    Main --> UI[HUD / Menús]
-    Level --> Player[Jugador / Player.tscn]
-    Level --> Enemies[Enemigos / NPCs]
-    Level --> Environment[Mapas / TileMaps / Environment]
-    Player --> FSM[State Machine]
-    Player --> Stats[StatsResource (.tres)]
-    UI --> EventBus[EventBus Autoload]
-    Player --> EventBus
-    EventBus --> StoryFlags[StoryFlags Autoload]
+    UI[Presentation / UI Layer] --> DOMAIN[Domain / Use Cases]
+    DOMAIN --> INFRA[Infrastructure / Data]
+    INFRA --> LOCAL[Local Storage]
+    INFRA --> REMOTE[Remote Service / API]
 ```
 
-## Nodos y Escenas Clave
+## 3. Índice de Módulos (Subdocumentos de Dominio)
+* 📦 **[Módulo Principal](./overview/architecture/modules/principal.md):** Especificación técnica y flujo operativo principal.
 
-| Categoría | Ruta de Escena / Script | Propósito / Responsabilidad |
-|---|---|---|
-| Autoload (Singleton) | `res://autoload/event_bus.gd` | Bus de señales globales (Gameplay ↔ UI) |
-| Autoload (Singleton) | `res://autoload/story_flags.gd` | Registro de banderas de historia y progreso de lore |
-| Autoload (Singleton) | `res://autoload/audio_manager.gd` | Gestor de música de fondo y efectos de sonido |
-| Escena Principal | `res://scenes/main/main.tscn` | Carga de niveles, transiciones de pantalla y pausado |
-| Entidad Jugador | `res://scenes/entities/player/player.tscn` | Movimiento, colisiones y control del jugador |
-| Interfaz (UI) | `res://scenes/ui/hud/hud.tscn` | Barra de vida, inventario y texto de misiones |
-
-## Sistemas y Recursos (.tres)
-
-| Sistema | Tipo / Ruta | Descripción |
-|---|---|---|
-| Máquina de Estados (FSM) | `res://scripts/components/state_machine.gd` | Manejo de estados (Idle, Run, Attack, Dialogue) |
-| Recursos de Estadísticas | `res://resources/stats/` | Definen vida, daño y velocidad de entidades |
-| Gestor de Misiones | `res://scripts/systems/quest_manager.gd` | Carga y verifica misiones desde `overview/lore/quests.md` |
+## 4. Guías Transversales
+* 🧭 **[Mapa Global de Rutas](./overview/architecture/routes_map.md)** — Enrutamiento y navegación del sistema.
+* 🔄 **[Flujo de Datos](./overview/architecture/core/data_flow.md)** — Estado global, sync y persistencia.
+* 📏 **[Reglas de Importación](./overview/architecture/core/import_rules.md)** — Convenciones de capas e importaciones.

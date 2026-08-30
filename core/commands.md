@@ -13,7 +13,7 @@ Cuando el usuario escribe un comando con prefijo `$`, el agente lo reconoce como
 | `$boot` | Bootstrap completo del proyecto |
 | `$status` | Mostrar estado actual en resumen |
 | `$work [descripción]` | Registrar nueva tarea/bug |
-| `$archi` | Actualizar arquitectura viva (diagramas Mermaid y conexiones) |
+| `$archi` | Actualizar arquitectura viva conforme a ARCHITECTURE_STANDARD.md (Hub & Spoke) |
 | `$learn [texto]` | Registrar aprendizaje general candidato en `overview/learning.md` |
 | `$learnagnostico [texto]` | Abstraer a términos genéricos antes de registrar |
 | `$close` | Protocolo de cierre de sesión con sincronización automática de rastreadores |
@@ -30,7 +30,7 @@ Pasos que el agente debe ejecutar:
 0. Ejecutar `git submodule status` para verificar integridad de submódulos.
 1. Leer `core/path_map.md`, `core/communication.md`, `core/brain.md`, `core/commands.md`.
 2. Verificar si existe `overview/` — si no, crear desde `templates/`.
-3. Cargar archivos de control de `overview/`: `session.md`, `work.md`, `work/tasks.md`, `work/deuda_tecnica.md`, `work/pendientes.md`, `work_review.md`, `architecture.md` y `trackers/progress.md`.
+3. Cargar archivos de control de `overview/`: `session.md`, `work.md`, `work/tasks.md`, `work/deuda_tecnica.md`, `work/pendientes.md`, `work_review.md`, `ARCHITECTURE.md` (o `overview/architecture/`) y `trackers/progress.md`.
 4. Detectar si el `Agente:` en `session.md` difiere del modelo actual → si difiere, activar protocolo `## Handoff de Agente` de `brain.md`.
 5. Alias divergentes: si alias y canónico coexisten con contenido distinto (`tasks.md`/`work.md`, `tracker.md`/`trackers/architecture.md`) → flag `[consolidar alias]` en `work.md`.
 6. `session.md` legado: si faltan `Agente:`, `## Reanudar` o `## Cambios` → reportar `session legado` (sin migrar automático).
@@ -79,19 +79,18 @@ $work bug: el drawer no cierra al navegar con GoRouter en iOS
 
 ### `$archi`
 
-Protocolo dedicado exclusivamente a garantizar la **exhaustividad total** de la arquitectura viva. Su única tarea es auditar y registrar hasta el último rincón del proyecto (pantallas, widgets, servicios, providers, repositorios y modelos) en `overview/architecture.md`.
+Protocolo dedicado exclusivamente a auditar, modularizar y mantener la arquitectura del proyecto conforme al **Agent Architecture Standard (`ARCHITECTURE_STANDARD.md`)**.
 
 El agente debe:
-1. Escanear exhaustivamente la estructura completa del proyecto y las modificaciones/conexiones no mapeadas previamente.
-2. Leer `overview/architecture.md`.
-3. Actualizar `overview/architecture.md` incorporando o completando los **diagramas sintéticos Mermaid** (`graph LR` / `graph TD`) y las tablas de mapa de conexiones clave hasta lograr cobertura del 100%. **Omitir bloques de texto redundantes**; toda la estructura y sus conexiones deben expresarse de forma sintética mediante diagramas.
-4. Confirmar: `Arquitectura viva registrada exhaustivamente en overview/architecture.md con cobertura total y diagramas Mermaid.`
-
-Ejemplo de uso:
-```
-$archi
-```
-
+0. **Detección de archivo plano legado**: Si existe `overview/architecture.md` como archivo único (no carpeta), leerlo íntegramente como fuente de referencia. Usarlo para extraer diagramas, capas y módulos ya documentados antes de generar los subdocumentos. **No eliminarlo** hasta que la migración esté verificada.
+1. Escanear exhaustivamente la estructura completa del proyecto, módulos y rutas.
+2. Mantener `overview/architecture.md` como **Índice Raíz Hub & Spoke** (< 200L): diagrama Mermaid de alto nivel de capas, tabla de capas del sistema e hipervínculos a los subdocumentos en `overview/architecture/`. Si proviene de migración del archivo plano legado, extraer solo el contenido de alto nivel y mover los detalles técnicos a los subdocumentos.
+3. Crear o actualizar los subdocumentos en `overview/architecture/` extrayendo o refinando el contenido del archivo plano legado (si existía):
+   - `overview/architecture/routes_map.md` (Mapa global de enrutamiento: Godot SceneTree).
+   - `overview/architecture/core/data_flow.md` (Estado global, Autoloads, Signals y Recursos).
+   - `overview/architecture/core/import_rules.md` (Reglas de importación por nivel de capa).
+   - `overview/architecture/modules/<modulo>.md` (Subdocumento por cada módulo que supere 2 diagramas Mermaid o 5 componentes/pantallas).
+4. Confirmar: `Arquitectura viva actualizada conforme a ARCHITECTURE_STANDARD.md (Índice Raíz overview/architecture.md + Subdocumentos en overview/architecture/).`
 ---
 
 ### `$learn [texto]`
