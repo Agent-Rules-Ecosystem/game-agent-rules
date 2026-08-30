@@ -21,7 +21,8 @@
 | Sesión | `overview/session.md` | Inicio/cierre |
 | Trabajo / Backlog | `overview/work.md` | Inicio/cierre |
 | Aprendizajes | `overview/learning.md` | Al cerrar |
-| Arquitectura Godot | `overview/architecture.md` | Al iniciar |
+| Arquitectura Godot (Hub) | `overview/architecture.md` | Al iniciar / `$archi` |
+| Arquitectura Godot (Spoke) | `overview/architecture/` | Al iniciar / `$archi` |
 | Progreso | `overview/trackers/progress.md` | Inicio/cierre |
 | Historial | `overview/history/` | Al resumir |
 | Contexto de agente | `overview/context/` | Inicio/bajo demanda |

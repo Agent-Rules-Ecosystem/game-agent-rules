@@ -42,6 +42,7 @@ overview/lore/
 |---|---|
 | `$boot` | Bootstrap completo del juego + mapeo de Godot y Lore |
 | `$status` | Resumen del estado actual técnico y narrativo |
+| `$archi` | Actualiza mapa técnico de Godot en `overview/architecture.md` (Hub) y `overview/architecture/` (Spoke) |
 | `$close` | Cierre de sesión y verificación de GDScript / Lore |
 | `$learn [texto]` | Registrar aprendizaje candidato del core |
 | `$learnagnostico [texto]` | Abstraer y registrar regla genérica de juego/lore |
