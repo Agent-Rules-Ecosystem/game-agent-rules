@@ -1,29 +1,30 @@
-<<<<<<< HEAD
-# Game Dev & Lore Agent Rules adapter
-=======
-# Flutter Agent Rules — Codex Adapter
->>>>>>> d55316b03e7586d1fbcfb117550721f2b8c07a17
+# Game Agent Rules — Adapters
 
-> Codex (OpenAI) lee este archivo automáticamente como `AGENTS.md`.
-> Las reglas viven en `.agents/`; **no duplicar aquí**.
+> Este directorio contiene los adapters por motor de juego.  
+> El agente debe activar el adapter correspondiente al detectar el motor del proyecto.
 
-## Qué hacer al iniciar
+## Adapters disponibles
 
-1. Leer `.agents/AGENTS.md` completo antes de responder o editar.
-2. Si no existe `overview/` en la raíz del proyecto → crearla desde `.agents/templates/`.
-3. Cargar: `overview/session.md`, `overview/work.md`, `overview/work/tasks.md`.
-4. Si el agente anterior fue distinto → activar protocolo Handoff (`core/brain.md §Handoff`).
+| Archivo | Motor | Activar cuando detectes |
+|---|---|---|
+| `godot.md` | Godot 4.x | `project.godot`, archivos `.gd` / `.tscn` |
+| `unity.md` | Unity 2022+ | carpeta `Assets/` + `Packages/manifest.json` |
+| `unreal.md` | Unreal Engine 5 | archivo `*.uproject`, carpeta `Source/` con `Build.cs` |
 
-## Qué hacer al trabajar
+## Cómo activar un adapter
 
-- Actualizar `overview/work.md` y `overview/work/tasks.md` **antes** de editar código.
-- Cambios quirúrgicos: no mejorar código ajeno sin necesidad.
-- Referencias rápidas: `$boot` `$status` `$close` `$learn` `$work` (ver `.agents/core/commands.md`).
+Al hacer `$boot`, después de cargar `core/`, el agente debe:
 
-## Qué hacer al cerrar
+1. Escanear la raíz del proyecto de juego en busca de los indicadores de la tabla anterior.
+2. Leer el adapter correspondiente (`adapters/godot.md`, `adapters/unity.md` o `adapters/unreal.md`).
+3. Combinar las reglas del adapter con las reglas base de `core/`.
+4. Si se detectan **dos o más motores** → preguntar al usuario cuál es el motor principal.
 
-1. Actualizar `overview/session.md` con firma: `[Modelo] — YYYY-MM-DD`.
-2. Registrar pendientes en `overview/work/pendientes.md`.
-3. Indicar validación: `verificado` | `no verificado` | `no aplica`.
+## Reglas comunes a todos los adapters
 
-> Estado del proyecto → `overview/`. Reglas globales → `.agents/`. No duplicar.
+- Límite de líneas por archivo de código: ver tabla en cada adapter.
+- Señales/Eventos/Delegates preferidos sobre referencias directas.
+- Estado global mínimo: solo lo verdaderamente compartido entre todos los sistemas.
+- `$archi` siempre genera `routes_map.md` con el flujo de escenas del motor activo.
+
+> Reglas base del core → `.agents/core/`. Estado del proyecto → `overview/`. No duplicar aquí.
