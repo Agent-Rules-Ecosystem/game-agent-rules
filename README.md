@@ -16,21 +16,24 @@ Repositorio centralizado: cerebro operativo para desarrollo de juegos en Godot 4
 5. **$-Comandos**:
    - `$boot`, `$status`, `$close`, `$learn`, `$learnagnostico`, `$work` para operar de forma inmediata.
 
-## Instalación en tu Proyecto de Juego
+## ⚡ Quick Start
 
-### 1. Core (`.agents`)
+**1. Instala la gobernanza en tu proyecto**
 ```bash
-git submodule add git@github.com:xolotl-hub/game-agent-rules.git .agents
+git submodule add git@github.com:Agent-Rules-Ecosystem/game-agent-rules.git .agents
 ```
 
-### 2. Instalación de Skills (`.skill/` en la raíz)
-
-```bash
-git submodule add git@github.com:Agent-Rules-Ecosystem/lore-agent-skill.git .skill/lore-agent-skill
-git submodule add git@github.com:Agent-Rules-Ecosystem/second-brain-agent-rules.git .skill/second-brain-agent-skill
+**2. Inicia el agente**
+```text
+$boot
 ```
 
-Instalar el adaptador de `.agents/adapters/` adecuado para tu entorno (Claude, Gemini, Cursor). En tu proyecto de juego, inicializar `overview/` desde `.agents/templates/` (o escribir `$boot`).
+**3. Registra tu primera tarea**
+```text
+$work agregar sistema de inventario al jugador en Godot
+```
+
+---
 
 ## Estructura de Lore (`overview/lore/`)
 

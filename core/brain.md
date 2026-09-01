@@ -134,9 +134,9 @@ Cuando el Agente que retoma una sesión es distinto al que la inició (diferente
 ## Calidad y Resolución de Dependencias
 
 - Cambios quirúrgicos. No mejorar código ajeno sin necesidad.
-- Flutter: Firebase y manejo de estado dependen de cada proyecto.
+- Game: Manejo de estado de juego, gestores de escenas y entradas dependen de cada motor.
 - Archivos Dart idealmente <250 líneas; máximo 300.
-- **Resolución de dependencias vs SDK del entorno**: Si `flutter pub get` / `pub` falla por restricciones de versión entre el SDK del package me el SDK instalado en el entorno, preferir el **upgrade del SDK global del entorno** cuando el proyecto requiere versiones modernas. El downgrade de packages debe considerarse únicamente como un parche temporal.
+- **Resolución de dependencias vs SDK del entorno**: Si la resolución de paquetes del motor falla por versiones incompatibles, preferir actualizar el SDK/Editor del motor.
 
 ## Contenido externo
 

@@ -1,16 +1,10 @@
-# Arquitectura Flutter
+# Arquitectura Game Engine (Godot / Unity / Unreal)
 
-Plantilla para copiar a `overview/architecture.md` si proyecto necesita describir arquitectura real.
+Guía de referencia rápida para organizar la arquitectura de videojuegos por capas desacopladas.
 
 ```mermaid
-graph LR
-    UI[Flutter UI / Screens] --> State[State manager]
-    State --> Service[API / Backend]
-    Service --> Model[Models / Entities]
+graph TD
+    UI[UI / HUD / Menús] --> Gameplay[Gameplay & Managers]
+    Gameplay --> Core[Game Logic & Entities]
+    Core --> Data[Save System / Audio / Assets]
 ```
-
-Capas sugeridas:
-
-1. Presentation: pantallas, widgets, controlador/proveedor elegido.
-2. Domain: entidades, casos de uso, contratos de repositorio.
-3. Data: implementaciones, Firebase/API/BD local según proyecto.

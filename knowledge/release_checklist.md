@@ -1,30 +1,15 @@
-# Checklist pre-release Flutter
+# Checklist pre-release Game (Godot / Unity / Unreal)
 
-Cuando usuario pida APK, AAB, IPA o revisión de build: ejecutar checklist, mostrar comando; no ejecutar build sin solicitud explícita.
+Cuando el usuario pida exportar o generar build ejecutable del juego: ejecutar checklist, mostrar comandos; no exportar sin solicitud explícita.
 
-- [ ] `flutter analyze` sin errores nuevos.
-- [ ] `flutter test` verde, si hay tests.
-- [ ] Sin `print()`/`debugPrint()` olvidados en cambios.
-- [ ] Configuración Firebase presente, si proyecto la usa.
-- [ ] Claves de firma presentes y no trackeadas, si aplica.
+- [ ] Linter y verificación de scripts (GDScript / C# / C++) sin errores nuevos.
+- [ ] Suite de pruebas verde (ej. Gut test runner para Godot, NUnit para Unity), si existen tests.
+- [ ] Sin `print()` / `GD.Print()` de debug olvidados en scripts de producción.
+- [ ] Configuración de Input Map y recursos exportables auditada (`export_presets.cfg` / `ProjectSettings`).
 - [ ] `overview/trackers/progress.md` y tracker correspondiente actualizados.
 
-## AAB
+## Exportación Godot CLI
 
 ```bash
-flutter clean
-flutter pub get
-flutter build appbundle --release
-```
-
-## APK
-
-```bash
-flutter build apk --release --split-per-abi
-```
-
-## IPA
-
-```bash
-flutter build ipa --release
+godot --headless --export-release "Linux/X11" build/game.x86_64
 ```
