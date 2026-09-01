@@ -18,11 +18,26 @@ Repositorio centralizado: cerebro operativo para desarrollo de juegos en Godot 4
 
 ## Instalación en tu Proyecto de Juego
 
+### 1. Core (`.agents`)
 ```bash
-git submodule add https://github.com/xolotl-hub/game-agent-rules.git .agents
+git submodule add git@github.com:xolotl-hub/game-agent-rules.git .agents
 ```
 
-Instalar el adaptador de `.agents/adapters/` adecuado para tu entorno (Claude, Gemini, Cursor). En tu proyecto de Godot, inicializar `overview/` desde `.agents/templates/` (o escribir `$boot`).
+### 2. Instalación de Skills (`.skills/` o sub-módulos anidados)
+
+- **Modo Subordinado (dentro de `.agents/skills/`)**:
+  ```bash
+  cd .agents
+  git submodule add git@github.com:Agent-Rules-Ecosystem/second-brain-agent-rules.git skills/second-brain-agent-skill
+  ```
+
+- **Modo Proyecto (`.skills/` en la raíz)**:
+  ```bash
+  git submodule add git@github.com:Agent-Rules-Ecosystem/lore-agent-skill.git .skills/lore-agent-skill
+  git submodule add git@github.com:Agent-Rules-Ecosystem/second-brain-agent-rules.git .skills/second-brain-agent-skill
+  ```
+
+Instalar el adaptador de `.agents/adapters/` adecuado para tu entorno (Claude, Gemini, Cursor). En tu proyecto de juego, inicializar `overview/` desde `.agents/templates/` (o escribir `$boot`).
 
 ## Estructura de Lore (`overview/lore/`)
 
